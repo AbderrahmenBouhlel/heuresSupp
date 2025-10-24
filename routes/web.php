@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Teacher;
-
+use App\Modules\Teacher\V1\Entities\Teacher;
 Route::get('/admin', function () {
     $adminVar = (object)[
         'nom' => 'Ben Salah',

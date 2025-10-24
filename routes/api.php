@@ -1,39 +1,29 @@
-
-
-
-
-
 <?php
-use Illuminate\Http\Request;
+
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\auth\AuthController;
 
-// localhost//api/v1/auth
-// localhost//api/v1/admin
 
-Route::prefix('v1')->group(function(){
-        Route::prefix('auth')->group(function(){
-                Route::post('login', fn() => 'temp');
-                Route::middleware('auth.token')->post('logout', fn() => 'temp');
-        });
+Route::prefix('v1')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('login', [AuthController::class, 'login']);
+        Route::middleware('auth.token')->get('logout', [AuthController::class, 'logout']);
+        Route::middleware('auth.token')->get('me', [AuthController::class, 'me']);
+    });
+    Route::prefix('shared')->group(function () {
+        // AcademicYear routes
+        require base_path('app/Modules/AcademicYear/V1/api.php');
+        require base_path('app/Modules/Notifications/V1/api.php');
+        
+    });
+
+    // admin api endpoints
+    require base_path('app/Modules/Admin/V1/api.php');
+
+
+    // teacher api endpoints
+    require base_path('app/Modules/Teacher/V1/api.php');
+
     
-        // Route::prefix('admin')
-        //     ->middleware(['auth.token', 'role:admin'])
-        //     ->group(function () {
-
-        //         Route::get('teachers', )
-        //     });
-    
-    
-        // Route::prefix('teacher')
-        //     ->middleware(['auth.token', 'role:teacher'])
-        //     ->group(function () {
-    
-        //         Route::get('profile', function (Request $request){
-        //             return response()->json([
-        //                 'message' => 'Teacher profile retrieved successfully',
-        //             ]);
-        //         });
-        //     });
-
-
 });

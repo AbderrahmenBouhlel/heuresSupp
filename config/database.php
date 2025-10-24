@@ -60,7 +60,8 @@ return [
             // 'options' => extension_loaded('pdo_mysql') ? array_filter([
             //     PDO::MYSQL_ATTR_SSL_CA => base_path('ssl/ca.pem'), // 
             // ]) : [],
-            'options' => extension_loaded('pdo_mysql') ? array_filter([]) : [], // for loacl DB 
+            'options'=>[],
+            
         ],
 
         'mariadb' => [
